@@ -16,9 +16,7 @@ export default function ChatInput({chatId}: Value) {
     const [inputText, setInputText] = useState("");
     const {data: session} = useSession();
 
-    const {data: model} = useSWR('model',{
-        fallbackData: 'text-davinci-003'
-    })
+    const model = "text-davinci-003";
 
 const sendInput = async (e: FormEvent<HTMLFormElement>) =>{
 e.preventDefault()

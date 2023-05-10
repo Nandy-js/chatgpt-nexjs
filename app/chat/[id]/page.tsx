@@ -8,7 +8,7 @@ type Value={
 }
 
 export default function ChatPage({params: {id}}: Value) {
-    // console.log(props)
+   
   return (
     <div className="flex flex-col h-screen overflow-hidden">
        <Chat chatId={id}/>
