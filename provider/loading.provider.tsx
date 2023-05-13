@@ -1,14 +1,15 @@
-"use client";
-import { useState } from "react";
+'use client';
 
-import { ChatLoadingContext } from "../../../context/ChatLoading.context";
+import { ChatLoadingContext } from '@/context/loading.context';
+import React, { useState } from 'react';
 
-export default async function RootLayout({
+export default function LoadingProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const [isLoading, setIsLoading] = useState(false);
+
   return (
     <ChatLoadingContext.Provider value={{ isLoading, setIsLoading }}>
       {children}

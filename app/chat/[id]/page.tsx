@@ -1,5 +1,7 @@
-import Chat from "@/components/Chat";
-import ChatInput from "@/components/ChatInput";
+'use client';
+
+import Chat from '@/components/Chat';
+import ChatInput from '@/components/ChatInput';
 
 type Value = {
   params: {

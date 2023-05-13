@@ -1,14 +1,14 @@
-import { db } from "@/firebase";
+import { db } from '@/firebase';
 import {
   ChatBubbleBottomCenterIcon,
   TrashIcon,
-} from "@heroicons/react/24/outline";
-import { collection, deleteDoc, doc } from "firebase/firestore";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useCollection } from "react-firebase-hooks/firestore";
+} from '@heroicons/react/24/outline';
+import { collection, deleteDoc, doc } from 'firebase/firestore';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useCollection } from 'react-firebase-hooks/firestore';
 
 type Value = {
   id: string;
@@ -20,7 +20,7 @@ export default function ChatHistory({ id }: Value) {
   const [active, setActive] = useState(false);
 
   const [messages] = useCollection(
-    collection(db, "users", session?.user?.email!, "chats", id, "messages")
+    collection(db, 'users', session?.user?.email!, 'chats', id, 'messages'),
   );
 
   useEffect(() => {
@@ -30,19 +30,19 @@ export default function ChatHistory({ id }: Value) {
   }, [pathname]);
 
   const deleteChat = async () => {
-    await deleteDoc(doc(db, "users", session?.user?.email!, "chats", id));
-    router.replace("/");
+    await deleteDoc(doc(db, 'users', session?.user?.email!, 'chats', id));
+    router.replace('/');
   };
 
   return (
     <Link
       href={`/chat/${id}`}
       className={`chatHistory justify-center
-    ${active && "bg-gray-700/50"}`}
+    ${active && 'bg-gray-700/50'}`}
     >
       <ChatBubbleBottomCenterIcon className="h-5 w-5" />
       <p className="flex-1 hidden md:inline-flex truncate">
-        {messages?.docs[messages?.docs.length - 1]?.data().text || "New Chat"}
+        {messages?.docs[messages?.docs.length - 1]?.data().text || 'New Chat'}
       </p>
       <TrashIcon
         onClick={deleteChat}

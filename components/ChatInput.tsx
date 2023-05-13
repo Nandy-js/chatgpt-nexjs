@@ -1,36 +1,32 @@
-"use client";
+'use client';
 
-// import ChatInputContext from "@/context/chatInput.context"
-import { db } from "@/firebase";
-import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { useSession } from "next-auth/react";
-import { FormEvent, useContext, useState } from "react";
-import { toast } from "react-hot-toast";
-import Loader from "./PageLoader/loader";
-import { truncate } from "fs";
-import { ChatLoadingContext } from "@/context/ChatLoading.context";
+import { db } from '@/firebase';
+import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { useSession } from 'next-auth/react';
+import { FormEvent, useContext, useState } from 'react';
+import { ChatLoadingContext } from '@/context/loading.context';
 
 type Value = {
   chatId: string;
 };
 
 export default function ChatInput({ chatId }: Value) {
-  const [inputText, setInputText] = useState("");
+  const [inputText, setInputText] = useState('');
   const { data: session } = useSession();
   const { isLoading, setIsLoading } = useContext(ChatLoadingContext);
 
-  const model = "text-davinci-003";
-
-  //   setIsLoading(true);
+  const model = 'text-davinci-003';
 
   const sendInput = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setIsLoading(true);
+
     if (!inputText) return;
 
     const data = inputText.trim();
-    setInputText("");
+    setInputText('');
 
     const message: Message = {
       text: inputText,
@@ -47,23 +43,23 @@ export default function ChatInput({ chatId }: Value) {
     await addDoc(
       collection(
         db,
-        "users",
+        'users',
         session?.user?.email!,
-        "chats",
+        'chats',
         chatId,
-        "messages"
+        'messages',
       ),
-      message
+      message,
     );
 
     // const notification = toast.loading('Asking ChatGPT...')
     setIsLoading(true);
-    console.log(isLoading, "Hiii");
+    console.log(isLoading, 'Hiii');
 
-    await fetch("/api/queries", {
-      method: "POST",
+    await fetch('/api/queries', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         inputText: data,
@@ -72,9 +68,6 @@ export default function ChatInput({ chatId }: Value) {
         session,
       }),
     }).then(() => {
-      // toast.success('Success!',{
-      //     id: notification,
-      // })
       setIsLoading(false);
     });
   };
@@ -87,7 +80,7 @@ export default function ChatInput({ chatId }: Value) {
             disabled:cursor-not-allowed disabled:text-gray-300"
           disabled={!session}
           value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
+          onChange={e => setInputText(e.target.value)}
           type="text"
           placeholder="Send a message."
         />

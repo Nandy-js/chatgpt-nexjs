@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, createContext, useState } from "react";
+import { Dispatch, SetStateAction, createContext } from 'react';
 
 type ChatLoadingContextProps = {
   isLoading: boolean;
