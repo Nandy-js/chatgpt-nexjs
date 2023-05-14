@@ -52,9 +52,7 @@ export default function ChatInput({ chatId }: Value) {
       message,
     );
 
-    // const notification = toast.loading('Asking ChatGPT...')
     setIsLoading(true);
-    console.log(isLoading, 'Hiii');
 
     await fetch('/api/queries', {
       method: 'POST',
