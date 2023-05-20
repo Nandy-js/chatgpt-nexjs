@@ -1,14 +1,14 @@
-import { getApp, getApps, initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getApp, getApps, initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDGkQsGEA3s1nMJ6KBGBiKTfjQKuSZ8cSo",
-  authDomain: "chatgpt-example-6efc8.firebaseapp.com",
-  projectId: "chatgpt-example-6efc8",
-  storageBucket: "chatgpt-example-6efc8.appspot.com",
-  messagingSenderId: "271548355006",
-  appId: "1:271548355006:web:3d9ece54b980d46ba929ef",
+  apiKey: process.env.NEXT_PUBLIC_API_Key,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
 };
 
 // Initialize Firebase
